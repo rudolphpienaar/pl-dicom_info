@@ -8,9 +8,9 @@
 # STEP 1. Change these values to your liking.
 
 PLUGIN_NAME="$(basename $(dirname $(realpath $0)))"  # name of current directory
-PLUGIN_TITLE='My ChRIS Plugin'
-SCRIPT_NAME='commandname'
-DESCRIPTION='A ChRIS plugin to do something awesome'
+PLUGIN_TITLE='Report on DICOM Tag Information'
+SCRIPT_NAME='dicom_info'
+DESCRIPTION='A ChRIS DS plugin that generates various reports based on the tag information in a DICOM file.'
 ORGANIZATION='FNNDSC'
 EMAIL='dev@babyMRI.org'
 
@@ -21,7 +21,7 @@ ENABLE_CI=yes
 
 # STEP 2. Uncomment the line below.
 
-#READY=yes
+READY=yes
 
 # STEP 3. Run: ./bootstrap.sh
 
