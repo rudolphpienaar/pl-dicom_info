@@ -47,7 +47,6 @@ jobs:
 
   build:
     name: Build
-    needs: [ test ]  # tests must pass before build
     if: github.event_name == 'push' || github.event_name == 'release'
     runs-on: ubuntu-22.04
 
