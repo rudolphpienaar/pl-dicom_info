@@ -1,18 +1,18 @@
 from setuptools import setup
 
 setup(
-    name='chris-plugin-template',
+    name='dicom_info',
     version='1.0.0',
-    description='A ChRIS DS plugin template',
+    description='A ChRIS DS plugin that generates various reports based on the tag information in a DICOM file.',
     author='FNNDSC',
     author_email='dev@babyMRI.org',
-    url='https://github.com/FNNDSC/python-chrisapp-template',
-    py_modules=['app'],
+    url='https://github.com/FNNDSC/pl-dicom_',
+    py_modules=['dicom_info'],
     install_requires=['chris_plugin'],
     license='MIT',
     entry_points={
         'console_scripts': [
-            'commandname = app:main'
+            'dicom_info = dicom_info:main'
         ]
     },
     classifiers=[
