@@ -7,7 +7,7 @@ from pathlib import Path
 from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter
 from importlib.metadata import Distribution
 
-from chris_plugin import chris_plugin
+from chris_plugin   import chris_plugin
 
 __pkg       = Distribution.from_name(__package__)
 __version__ = __pkg.version
