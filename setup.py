@@ -2,11 +2,11 @@ from setuptools import setup
 
 setup(
     name='dicom_info',
-    version='1.0.4',
+    version='1.0.6',
     description='A ChRIS DS plugin that generates various reports based on the tag information in a DICOM file.',
     author='FNNDSC',
     author_email='dev@babyMRI.org',
-    url='https://github.com/FNNDSC/pl-dicom_',
+    url='https://github.com/FNNDSC/pl-dicom_info',
     py_modules=['dicom_info'],
     install_requires=['chris_plugin'],
     license='MIT',

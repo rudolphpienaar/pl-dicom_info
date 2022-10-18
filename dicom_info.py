@@ -4,7 +4,7 @@ import logging
 logging.disable(logging.CRITICAL)
 
 from pathlib import Path
-from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter
+from argparse import ArgumentParser, Namespace, ArgumentDefaultsHelpFormatter, RawTextHelpFormatter
 from importlib.metadata import Distribution
 
 from chris_plugin   import chris_plugin
@@ -23,7 +23,7 @@ from    pfdicom_tagExtract          import  pfdicom_tagExtract
 from    pfdicom_tagExtract.__main__ import  package_CLIDS,              \
                                             package_argsSynopsisDS,     \
                                             package_tagProcessingHelp
-from    pfdicom_tagExtract.__main__ import parserDS
+from    pfdicom_tagExtract.__main__ import  parserDS
 
 DISPLAY_TITLE = r"""
        _           _ _                       _        __
@@ -106,7 +106,6 @@ def synopsis(ab_shortOnly = False):
     else:
         return shortSynopsis + description
 
-
 def earlyExit_check(args) -> int:
     """Perform some preliminary checks
     """
@@ -119,9 +118,10 @@ def earlyExit_check(args) -> int:
         print(str_help)
         return 1
     if args.b_version:
-        print("Name:    %s\nVersion: %s" % (__pkg.name, __version__))
+        print("Name:    %s\nVersion: %s" % (__name__, __version__))
         return 1
     return 0
+
 
 # documentation: https://fnndsc.github.io/chris_plugin/chris_plugin.html#chris_plugin
 @chris_plugin(
@@ -136,19 +136,18 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
 
     print(DISPLAY_TITLE)
 
-    args                    = parserDS.parse_args()
+    if earlyExit_check(options): return 1
 
-    if earlyExit_check(args): return 1
-
-    args.inputDir           = str(inputdir)
-    args.outputDir          = str(outputdir)
-    args.str_version        = __version__
-    args.str_desc           = synopsis(True)
+    options.inputDir        = options.inputdir
+    options.outputDir       = options.outputdir
+    options.str_version     = __version__
+    options.str_desc        = synopsis(True)
     pf_dicom_tagExtract     = pfdicom_tagExtract.\
-                                pfdicom_tagExtract(vars(args)).\
+                                pfdicom_tagExtract(vars(options)).\
                                     run(timerStater = True)
 
-    if args.printElapsedTime:
+
+    if options.printElapsedTime:
         pf_dicom_tagExtract.dp.qprint(
                                     "Elapsed time = %f seconds" %
                                     d_pfdicom_tagExtract['runTime']
