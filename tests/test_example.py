@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from dicom_info import parser, main, DISPLAY_TITLE
+from dicom_info import parserDS, main, DISPLAY_TITLE
 
 
 def test_main(mocker, tmp_path: Path):
@@ -12,7 +12,9 @@ def test_main(mocker, tmp_path: Path):
     inputdir.mkdir()
     outputdir.mkdir()
 
-    options = parser.parse_args(['--man', '/tmp', '/tmp'])
+    options = parserDS.parse_args(['--man', '/tmp', '/tmp'])
+    options.inputDir           = str(inputdir)
+    options.outputDir          = str(outputdir)
 
     mock_print = mocker.patch('builtins.print')
     main(options, inputdir, outputdir)
