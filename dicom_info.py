@@ -138,8 +138,6 @@ def main(options: Namespace, inputdir: Path, outputdir: Path):
 
     if earlyExit_check(options): return 1
 
-    options.inputDir        = options.inputdir
-    options.outputDir       = options.outputdir
     options.str_version     = __version__
     options.str_desc        = synopsis(True)
     pf_dicom_tagExtract     = pfdicom_tagExtract.\
