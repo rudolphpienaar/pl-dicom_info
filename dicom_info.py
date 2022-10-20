@@ -134,22 +134,22 @@ def earlyExit_check(args) -> int:
 )
 def main(options: Namespace, inputdir: Path, outputdir: Path):
 
-    print(DISPLAY_TITLE)
+    d_run                       : dict = {}
 
+    if int(options.verbosity)   : print(DISPLAY_TITLE)
     if earlyExit_check(options): return 1
 
     options.str_version     = __version__
     options.str_desc        = synopsis(True)
-    pf_dicom_tagExtract     = pfdicom_tagExtract.\
-                                pfdicom_tagExtract(vars(options)).\
-                                    run(timerStater = True)
 
+
+    pf_dicom_tagExtract     = pfdicom_tagExtract.pfdicom_tagExtract(vars(options))
+    d_run                   = pf_dicom_tagExtract.run(timerStart = True)
 
     if options.printElapsedTime:
         pf_dicom_tagExtract.dp.qprint(
-                                    "Elapsed time = %f seconds" %
-                                    d_pfdicom_tagExtract['runTime']
-                                )
+            "Elapsed time = %f seconds" % d_run['runTime']
+        )
 
     return 0
 
