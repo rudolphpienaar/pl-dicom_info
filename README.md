@@ -5,24 +5,21 @@
 [![ci](https://github.com/FNNDSC/pl-dicom_info/actions/workflows/ci.yml/badge.svg)](https://github.com/FNNDSC/pl-dicom_info/actions/workflows/ci.yml)
 
 `pl-dicom_info` is a [_ChRIS_](https://chrisproject.org/)
-_ds_ plugin which takes in ...  as input files and
-creates ... as output files.
+_ds_ plugin which which accepts as input a filesystem tree containing nested DICOM files, and generates various reports on each nested directory of DICOM images. Output reports are saved in a concordant location in the output directory.
 
 ## Abstract
 
-`pl-dicom_info` is a ChRIS DS plugin that generates text based reports for upsteam DICOM files.
+This page briefly describes a ChRIS plugin that is built around [pfdicom_tagExtract](https://github.com/FNNDSC/pfdicom_tagExtract) and exposes all of its functionality. Please refer to the referenced link for detailed information about the usage flags.
 
 ## Installation
 
-`pl-dicom_info` is a _[ChRIS](https://chrisproject.org/) plugin_, meaning it can
-run from either within _ChRIS_ or the command-line.
+`pl-dicom_info` is a _[ChRIS](https://chrisproject.org/) plugin_, meaning it can run from either within _ChRIS_ or the command-line.
 
 [![Get it from chrisstore.co](https://ipfs.babymri.org/ipfs/QmaQM9dUAYFjLVn3PpNTrpbKVavvSTxNLE5BocRCW1UoXG/light.png)](https://chrisstore.co/plugin/pl-dicom_info)
 
 ## Local Usage
 
-To get started with local command-line usage, use [Apptainer](https://apptainer.org/)
-(a.k.a. Singularity) to run `pl-dicom_info` as a container:
+To get started with local command-line usage, use [Apptainer](https://apptainer.org/) (a.k.a. Singularity) to run `pl-dicom_info` as a container:
 
 ```shell
 singularity exec docker://fnndsc/pl-dicom_info dicom_info [--args values...] input/ output/
@@ -71,9 +68,7 @@ docker run --rm -it --userns=host -u $(id -u):$(id -g) \
 
 ### Testing
 
-Run unit tests using `pytest`.
-It's recommended to rebuild the image to ensure that sources are up-to-date.
-Use the option `--build-arg extras_require=dev` to install extra dependencies for testing.
+Run unit tests using `pytest`. It's recommended to rebuild the image to ensure that sources are up-to-date. Use the option `--build-arg extras_require=dev` to install extra dependencies for testing.
 
 ```shell
 docker build -t localhost/fnndsc/pl-dicom_info:dev --build-arg extras_require=dev .
@@ -82,8 +77,7 @@ docker run --rm -it localhost/fnndsc/pl-dicom_info:dev pytest
 
 ## Release
 
-Steps for release can be automated by [Github Actions](.github/workflows/ci.yml).
-This section is about how to do those steps manually.
+Steps for release can be automated by [Github Actions](.github/workflows/ci.yml). This section is about how to do those steps manually.
 
 ### Increase Version Number
 
