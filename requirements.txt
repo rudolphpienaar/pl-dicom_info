@@ -1,2 +1,4 @@
 chris_plugin==0.1.1
-pfdicom_tagExtract
+pftree>=3.2.32
+pfdicom>=2.0.12
+pfdicom_tagExtract>=3.0.20
