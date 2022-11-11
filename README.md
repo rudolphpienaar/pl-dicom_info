@@ -45,7 +45,7 @@ In this example, assume that you have a directory called `in` that contains DICO
 
 ```shell
 singularity exec --cleanenv docker://fnndsc/pl-dicom_info dicom_info in out \
-            --fileFilter  dcm                                               \
+            --fileFilter dcm                                                \
             --outputFileStem '%_md5|6_PatientID-%PatientAge'                \
             --imageFile 'm:%_md5|6_PatientID-%PatientAge.jpg'               \
             --outputFileType raw,json,html,dict,col,csv                     \
@@ -54,7 +54,7 @@ singularity exec --cleanenv docker://fnndsc/pl-dicom_info dicom_info in out \
             --outputFileType raw,json,html,dict,col,csv
 ```
 
-Here, the script will create a summary report in the `--outputFileType` formats, as well as an upscaled image with no interpolation of the "middle" image (if a series has multiple images). Moreover, the name of the files will start with an `md5_sum` of DICOM `PatientID` tag (using the first 6 chars), followed by the `%PatientAge`.
+Here, the script will create a summary report in the `--outputFileType` formats, as well as an upscaled image with no interpolation of the "middle" image (if a series has multiple images). Moreover, the name of the files will start with an `md5_sum` of DICOM `PatientID` tag (using the first 6 chars), followed by the `PatientAge` tag value.
 
 ## Development
 
