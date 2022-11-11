@@ -3,7 +3,7 @@
 #
 # - on push and PR: run pytest
 # - on push to main: build and push container images as ":latest"
-# - on push to semver tag: build and push container image with tag and
+# - on push to server tag: build and push container image with tag and
 #                          upload plugin description to https://chrisstore.co
 
 name: build
