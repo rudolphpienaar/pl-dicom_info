@@ -9,7 +9,7 @@ _ds_ plugin which which accepts as input a filesystem tree containing nested DIC
 
 ## Abstract
 
-This page briefly describes a ChRIS plugin that is built around [pfdicom_tagExtract](https://github.com/FNNDSC/pfdicom_tagExtract) and exposes all of its functionality. Please refer to the referenced link for detailed information about the usage flags.
+This page briefly describes a ChRIS plugin that is built around [`pfdicom_tagExtract`](https://github.com/FNNDSC/pfdicom_tagExtract) and exposes all of its functionality. Please refer to the referenced link for detailed information about the usage flags. Note that this is largely a rewrite of the [`pl-pfdicom_tagExtract`](https://github.com/FNNDSC/pfdicom_tagExtract) plugin using the [`chris_plugin_template`](https://github.com/FNNDSC/python-chrisapp-template) to allow for the new design pattern of "percolating" `arg_parsers` up from ancestor apps.
 
 ## Installation
 
@@ -33,15 +33,28 @@ singularity exec docker://fnndsc/pl-dicom_info dicom_info --help
 
 ## Examples
 
-`dicom_info` requires two positional arguments: a directory containing
-input data, and a directory where to create output data.
-First, create the input directory and move input data into it.
+You can run `dicom_info` with a `--man` flag to get in-line help (including some examples):
 
 ```shell
-mkdir incoming/ outgoing/
-mv some.dat other.dat incoming/
-singularity exec docker://fnndsc/pl-dicom_info:latest dicom_info [--args] incoming/ outgoing/
+singularity exec --cleanenv docker://fnndsc/pl-dicom_info dicom_info --man in out   
 ```
+
+Note that being a ChRIS DS plugin, `dicom_info` requires two positional arguments: a directory containing input data, and a directory where to create output data. The order of these positional arguments in largely irrelevant. We suggest positioning them either at the very front or very end of the CLI.
+
+In this example, assume that you have a directory called `in` that contains DICOM data. This data can be nested into any arbitrary tree.
+
+```shell
+singularity exec --cleanenv docker://fnndsc/pl-dicom_info dicom_info in out \
+            --fileFilter                                                    \
+            --outputFileStem '%_md5|6_PatientID-%PatientAge'                \
+            --imageFile 'm:%_md5|6_PatientID-%PatientAge.jpg'               \
+            --outputFileType raw,json,html,dict,col,csv                     \
+            --imageScale 3:none                                             \
+            --useIndexhtml                                                  \
+            --outputFileType raw,json,html,dict,col,csv
+```
+
+Here, the script will create a summary report in the `--outputFileType` formats, as well as an upscaled image with no interpolation of the "middle" image (if a series has multiple images). Moreover, the name of the files will start with an `md5_sum` of DICOM `PatientID` tag (using the first 6 chars), followed by the `%PatientAge`.
 
 ## Development
 
