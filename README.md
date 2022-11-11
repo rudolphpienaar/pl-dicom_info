@@ -45,7 +45,7 @@ In this example, assume that you have a directory called `in` that contains DICO
 
 ```shell
 singularity exec --cleanenv docker://fnndsc/pl-dicom_info dicom_info in out \
-            --fileFilter                                                    \
+            --fileFilter  dcm                                               \
             --outputFileStem '%_md5|6_PatientID-%PatientAge'                \
             --imageFile 'm:%_md5|6_PatientID-%PatientAge.jpg'               \
             --outputFileType raw,json,html,dict,col,csv                     \
